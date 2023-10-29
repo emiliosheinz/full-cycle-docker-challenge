@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+    db: 
+        container_name: db
+        command: --innodb-use-native-aio=0
+        image: mysql
+        restart: always
+        tty: true
+        environment:
+            MYSQL_DATABASE: fc-docker-challenge
+            MYSQL_ROOT_PASSWORD: root
+        networks:
+            - fc-docker-challenge
+        volumes:
+            - ./mysql:/var/lib/mysql
+
+    node:
+        image: emiliosheinz/fc-docker-challenge-node
+        build:
+            context: ./node
+        networks:
+            - fc-docker-challenge
+        depends_on:
+            - db
+
+    nginx:
+        image: emiliosheinz/fc-docker-challenge-nginx
+        restart: always
+        build:
+            context: ./nginx
+        ports:
+            - "8080:80"
+        networks:
+            - fc-docker-challenge
+
+networks:
+    fc-docker-challenge:        
+        
