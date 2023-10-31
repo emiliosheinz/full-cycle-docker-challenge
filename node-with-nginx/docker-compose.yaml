@@ -22,6 +22,8 @@ services:
             - fc-docker-challenge
         depends_on:
             - db
+        volumes:
+            - ./node:/usr/src/app
 
     nginx:
         image: emiliosheinz/fc-docker-challenge-nginx
@@ -32,6 +34,8 @@ services:
             - "8080:80"
         networks:
             - fc-docker-challenge
+        depends_on:
+            - node
 
 networks:
     fc-docker-challenge:        

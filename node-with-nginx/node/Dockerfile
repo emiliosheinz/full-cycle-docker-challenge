@@ -7,14 +7,16 @@ RUN npm install
 
 COPY . .
 
+RUN mkdir /usr/scripts
+
 RUN apt-get update && \
-  apt-get install -y wget && \
-  wget https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && \
-  chmod +x wait-for-it.sh
+  apt-get install -y curl && \
+  wget -P /usr/scripts/ https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && \
+  chmod +x /usr/scripts/wait-for-it.sh
 
 EXPOSE 3000
 
 ENTRYPOINT [ "/bin/bash", "-c" ]
-CMD ["./wait-for-it.sh db:3306 --strict --timeout=30 -- npm run start"]
+CMD ["/usr/scripts/wait-for-it.sh db:3306 --strict --timeout=30 -- npm run start"]
 
 
