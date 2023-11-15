@@ -1,5 +1,3 @@
-![fullcycle-logo](https://github.com/emiliosheinz/full-cycle-docker-challenge/assets/103655828/be381844-db4f-412a-ae08-c4de165c3cb7)
-
 # Docker Challenge
 
 This repository contains the code for the challenge presented in the Docker module of the Full Cycle course.
